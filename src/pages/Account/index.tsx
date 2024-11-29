@@ -48,8 +48,8 @@ export default function Account() {
     }
   };
 
-  const confirmStatus = async (id: number, status: 1 | 2) => {
-    const data = await enableAccount({ id: id, status: status === 1 ? 2 : 1 });
+  const confirmStatus = async (id: number, status: 0 | 1) => {
+    const data = await enableAccount({ id: id, status: status === 0 ? 1 : 0 });
     if (data.code === 200) {
       message.success('操作成功');
       if (actionRef.current) {
@@ -74,7 +74,7 @@ export default function Account() {
       dataIndex: 'status',
       valueEnum: {
         1: { text: '已启用', status: 'Success' },
-        2: { text: '已禁用', status: 'Error' },
+        0: { text: '已禁用', status: 'Error' },
       },
     },
     {
@@ -116,7 +116,7 @@ export default function Account() {
               setPasswordModalOpen(true);
             }}
           >
-            修改密码
+            重置密码
           </Button>
           <Popconfirm
             title="确认删除？"
@@ -194,10 +194,15 @@ export default function Account() {
           }
         }}
       >
-        <ProFormText width="md" label="登录账号" name="username" rules={[{ required: true }]} />
+        <ProFormText
+          width="md"
+          label="登录账号"
+          name="username"
+          rules={[{ required: true }]}
+          placeholder={'请输入字母+数字的组合'}
+        />
         <ProFormText width="md" label="昵称" name="nickName" rules={[{ required: true }]} />
         <ProFormText width="md" label="密码" name="password" rules={[{ required: true }]} />
-        <ProFormText width="md" label="备注" name="note" rules={[{ required: true }]} />
       </ModalForm>
       <ModalForm
         title={'编辑'}
@@ -230,7 +235,7 @@ export default function Account() {
         <ProFormText width="md" label="备注" name="note" rules={[{ required: true }]} />
       </ModalForm>
       <ModalForm
-        title={'修改密码'}
+        title={'重置密码'}
         formRef={formRef}
         width="380px"
         open={passwordModalOpen}
@@ -255,7 +260,6 @@ export default function Account() {
           name="username"
           rules={[{ required: true }]}
         />
-        <ProFormText width="md" label="旧密码" name="oldPassword" rules={[{ required: true }]} />
         <ProFormText width="md" label="新密码" name="newPassword" rules={[{ required: true }]} />
       </ModalForm>
     </PageContainer>

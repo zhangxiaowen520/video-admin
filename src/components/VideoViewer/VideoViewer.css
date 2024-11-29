@@ -1,0 +1,13 @@
+.video-thumbnail {
+  position: relative;
+  overflow: hidden;
+  /* border-radius: 8px; */
+}
+
+.video-thumbnail video {
+  transition: transform 0.3s ease;
+}
+
+.video-thumbnail:hover video {
+  transform: scale(1.1);
+}

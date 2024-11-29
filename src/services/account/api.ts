@@ -1,6 +1,5 @@
 // @ts-ignore
 /* eslint-disable */
-import { jsonToQueryString } from '@/utils/request';
 import { request } from '@umijs/max';
 
 /** 账号管理 - 获取列表 */
@@ -59,12 +58,14 @@ export async function deleteAccount(params: { id: number }) {
 }
 
 /** 账号管理 - 启用 or 禁用 */
-export async function enableAccount(params: { id: number; status: 1 | 2 }) {
-  return request<API.ResponseResult>(`${API_URL}/admin/updateStatus/${params.id}`, {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/x-www-form-urlencoded',
+export async function enableAccount(params: { id: number; status: 0 | 1 }) {
+  return request<API.ResponseResult>(
+    `${API_URL}/admin/updateStatus/${params.id}?status=${params.status}`,
+    {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/x-www-form-urlencoded',
+      },
     },
-    data: jsonToQueryString(params),
-  });
+  );
 }

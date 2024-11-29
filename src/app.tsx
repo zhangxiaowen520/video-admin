@@ -1,4 +1,4 @@
-import { AvatarDropdown, AvatarName, Question } from '@/components';
+import { AvatarDropdown, AvatarName } from '@/components';
 import { currentUser as queryCurrentUser } from '@/services/user/login';
 import type { Settings as LayoutSettings } from '@ant-design/pro-components';
 import { SettingDrawer } from '@ant-design/pro-components';
@@ -48,7 +48,7 @@ export async function getInitialState(): Promise<{
 // ProLayout 支持的api https://procomponents.ant.design/components/layout
 export const layout: RunTimeLayoutConfig = ({ initialState, setInitialState }) => {
   return {
-    actionsRender: () => [<Question key="doc" />],
+    // actionsRender: () => [<Question key="doc" />],
     avatarProps: {
       src: initialState?.currentUser?.icon,
       title: <AvatarName />,

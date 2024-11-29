@@ -19,19 +19,19 @@ export async function getVideoList(params: {
 }
 
 /** 账号管理 - 添加 */
-export async function addVideo(params: any) {
+export async function addVideo(params: API.AddVideoParams) {
   return request<API.ResponseResult>(`${API_URL}/video/add`, {
-    method: 'GET',
-    params: {
+    method: 'POST',
+    data: {
       ...params,
     },
   });
 }
 
 /** 账号管理 - 编辑 */
-export async function editVideo(params: any) {
+export async function editVideo(params: API.AddVideoParams) {
   return request<API.ResponseResult>(`${API_URL}/video/update`, {
-    method: 'GET',
+    method: 'POST',
     data: {
       ...params,
     },
@@ -42,25 +42,35 @@ export async function editVideo(params: any) {
 export async function deleteVideo(params: { id: number }) {
   return request<API.ResponseResult>(`${API_URL}/video/delete`, {
     method: 'GET',
-    data: {
+    params: {
       ...params,
     },
   });
 }
 
 /** 视频管理 - 发布 */
-export async function publishVideo(params: { id: number; status: 1 | 2 }) {
+export async function publishVideo(params: { id: number }) {
   return request<API.ResponseResult>(`${API_URL}/video/publish`, {
     method: 'GET',
-    data: {
+    params: {
       ...params,
     },
   });
 }
 
 /** 视频管理 - 下架 */
-export async function outVideo(params: { id: number; status: 1 | 2 }) {
+export async function outVideo(params: { id: number }) {
   return request<API.ResponseResult>(`${API_URL}/video/out`, {
+    method: 'GET',
+    params: {
+      ...params,
+    },
+  });
+}
+
+/** 视频管理 - 获取长链接 */
+export async function getVideoLongLink(params: { id: number }) {
+  return request<API.ResponseResult>(`${API_URL}/video/longLink`, {
     method: 'GET',
     data: {
       ...params,
