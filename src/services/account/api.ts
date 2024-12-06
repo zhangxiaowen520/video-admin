@@ -9,7 +9,7 @@ export async function getAccountList(params: {
   pageSize?: number;
   pageNum?: number;
 }) {
-  return request<API.ResponseResult>(`${API_URL}/admin/list`, {
+  return request<API.ResponseResult>(`${API_URL}/admin/sysList`, {
     method: 'GET',
     params: {
       ...params,

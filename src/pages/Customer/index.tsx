@@ -1,7 +1,7 @@
 import { ERROR_IMAGE } from '@/constants';
 import { getCustomerList } from '@/services/customer/api';
 import { ActionType, PageContainer, ProColumns, ProTable } from '@ant-design/pro-components';
-import { Image, Tag } from 'antd';
+import { Button, Flex, Image, Tag } from 'antd';
 import dayjs from 'dayjs';
 import { useRef } from 'react';
 
@@ -28,10 +28,10 @@ export default function Account() {
       title: '昵称',
       dataIndex: 'nickName',
     },
-    {
-      title: '密码',
-      dataIndex: 'password',
-    },
+    // {
+    //   title: '密码',
+    //   dataIndex: 'password',
+    // },
     {
       title: '会员状态',
       dataIndex: 'memberId',
@@ -70,11 +70,15 @@ export default function Account() {
         1: { text: '已启用', status: 'Success' },
       },
     },
-
     {
       title: '操作',
       dataIndex: 'option',
       width: '320px',
+      render: () => [
+        <Flex key="option" wrap="wrap" gap="small">
+          <Button>重置密码</Button>
+        </Flex>,
+      ],
     },
   ];
 

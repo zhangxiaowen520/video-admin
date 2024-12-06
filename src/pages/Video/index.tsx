@@ -261,7 +261,12 @@ export default function Video() {
             },
           }}
         />
-        <ProFormText width="lg" label="视频标签" name="tags" rules={[{ required: true }]} />
+        <ProFormText
+          width="lg"
+          label="视频标签,多个用英文逗号隔开"
+          name="tags"
+          rules={[{ required: true }]}
+        />
         <ProFormText width="lg" label="30s视频链接" name="longUrl" rules={[{ required: true }]} />
         <ProFormUploadButton
           extra="支持扩展名：.mp4"
@@ -340,7 +345,7 @@ export default function Video() {
           }
         }}
       >
-        <ProFormText width="lg" label="��频标题" name="title" rules={[{ required: true }]} />
+        <ProFormText width="lg" label="视频标题" name="title" rules={[{ required: true }]} />
         <ProFormTextArea width="lg" label="视频描述" name="reduce" rules={[{ required: true }]} />
         <ProFormText width="lg" label="视频封面" name="picture" rules={[{ required: true }]} />
         <ProFormUploadButton
@@ -369,7 +374,12 @@ export default function Video() {
             },
           }}
         />
-        <ProFormText width="lg" label="视频标签" name="tags" rules={[{ required: true }]} />
+        <ProFormText
+          width="lg"
+          label="视频标签,多个用英文逗号隔开"
+          name="tags"
+          rules={[{ required: true }]}
+        />
         <ProFormText width="lg" label="30s视频链接" name="longUrl" rules={[{ required: true }]} />
         <ProFormUploadButton
           extra="支持扩展名：.mp4"

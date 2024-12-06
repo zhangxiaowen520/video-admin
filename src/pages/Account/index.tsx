@@ -135,7 +135,7 @@ export default function Account() {
   useEffect(() => {
     if (formData && passwordModalOpen) {
       formRef?.current?.setFieldsValue({
-        username: formData.username,
+        ...formData,
       });
     }
   }, [formData]);
