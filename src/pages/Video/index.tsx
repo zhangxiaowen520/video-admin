@@ -128,6 +128,7 @@ export default function Video() {
     {
       title: '状态',
       dataIndex: 'status',
+      width: '100px',
       valueEnum: {
         0: { text: '已下架', status: 'Error' },
         1: { text: '已发布', status: 'Success' },

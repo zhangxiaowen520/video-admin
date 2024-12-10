@@ -1,9 +1,18 @@
 import { ERROR_IMAGE } from '@/constants';
+import { editAccountPassword } from '@/services/account/api';
 import { getCustomerList } from '@/services/customer/api';
-import { ActionType, PageContainer, ProColumns, ProTable } from '@ant-design/pro-components';
-import { Button, Flex, Image, Tag } from 'antd';
+import {
+  ActionType,
+  ModalForm,
+  PageContainer,
+  ProColumns,
+  ProFormInstance,
+  ProFormText,
+  ProTable,
+} from '@ant-design/pro-components';
+import { Button, Flex, Image, message, Tag } from 'antd';
 import dayjs from 'dayjs';
-import { useRef } from 'react';
+import { useEffect, useRef, useState } from 'react';
 
 /**
  * 账号管理
@@ -11,6 +20,11 @@ import { useRef } from 'react';
 
 export default function Account() {
   const actionRef = useRef<ActionType>();
+  const passwordFormRef = useRef<ProFormInstance>();
+
+  const [passwordModalOpen, setPasswordModalOpen] = useState(false);
+
+  const [formData, setFormData] = useState<any>();
 
   const columns: ProColumns<any>[] = [
     {
@@ -73,14 +87,29 @@ export default function Account() {
     {
       title: '操作',
       dataIndex: 'option',
-      width: '320px',
-      render: () => [
+      width: '100px',
+      render: (_, record) => [
         <Flex key="option" wrap="wrap" gap="small">
-          <Button>重置密码</Button>
+          <Button
+            onClick={() => {
+              setFormData(record);
+              setPasswordModalOpen(true);
+            }}
+          >
+            修改密码
+          </Button>
         </Flex>,
       ],
     },
   ];
+
+  useEffect(() => {
+    if (formData && passwordModalOpen) {
+      passwordFormRef?.current?.setFieldsValue({
+        ...formData,
+      });
+    }
+  }, [formData]);
 
   return (
     <PageContainer>
@@ -103,6 +132,34 @@ export default function Account() {
         }}
         columns={columns}
       />
+      <ModalForm
+        title={'重置密码'}
+        formRef={passwordFormRef}
+        width="380px"
+        open={passwordModalOpen}
+        onOpenChange={setPasswordModalOpen}
+        onFinish={async (value: any) => {
+          const data = await editAccountPassword({ ...value });
+          if (data.code === 200) {
+            message.success('密码修改成功');
+            setPasswordModalOpen(false);
+            if (actionRef.current) {
+              actionRef.current.reload();
+            }
+          } else {
+            message.error(data.message);
+          }
+        }}
+      >
+        <ProFormText
+          width="md"
+          disabled
+          label="登录账号"
+          name="username"
+          rules={[{ required: true }]}
+        />
+        <ProFormText width="md" label="新密码" name="newPassword" rules={[{ required: true }]} />
+      </ModalForm>
     </PageContainer>
   );
 }
