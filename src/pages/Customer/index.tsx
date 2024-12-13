@@ -30,6 +30,7 @@ export default function Account() {
     {
       title: '头像',
       dataIndex: 'icon',
+      search: false,
       render: (_, record) => {
         return <Image width={30} height={30} src={record.icon} fallback={ERROR_IMAGE} />;
       },
@@ -37,10 +38,14 @@ export default function Account() {
     {
       title: '账号',
       dataIndex: 'username',
+      search: {
+        transform: (value) => ({ keyword: value }),
+      },
     },
     {
       title: '昵称',
       dataIndex: 'nickName',
+      search: false,
     },
     // {
     //   title: '密码',
@@ -49,6 +54,7 @@ export default function Account() {
     {
       title: '会员状态',
       dataIndex: 'memberId',
+      search: false,
       render: (_, record) => {
         if (record.memberId) {
           return <Tag color="orange">VIP</Tag>;
@@ -59,6 +65,7 @@ export default function Account() {
     {
       title: '创建时间',
       dataIndex: 'createTime',
+      search: false,
       render: (_, record) => {
         if (record.createTime) {
           return `${dayjs(record.createTime).format('YYYY-MM-DD HH:mm:ss')}`;
@@ -69,6 +76,7 @@ export default function Account() {
     {
       title: '最后登录时间',
       dataIndex: 'loginTime',
+      search: false,
       render: (_, record) => {
         if (record.loginTime) {
           return `${dayjs(record.loginTime).format('YYYY-MM-DD HH:mm:ss')}`;
@@ -83,10 +91,12 @@ export default function Account() {
         0: { text: '已禁用', status: 'Error' },
         1: { text: '已启用', status: 'Success' },
       },
+      search: false,
     },
     {
       title: '操作',
       dataIndex: 'option',
+      search: false,
       width: '100px',
       render: (_, record) => [
         <Flex key="option" wrap="wrap" gap="small">
@@ -117,7 +127,6 @@ export default function Account() {
         headerTitle={'列表'}
         actionRef={actionRef}
         rowKey="id"
-        search={false}
         pagination={{
           defaultPageSize: 10,
         }}

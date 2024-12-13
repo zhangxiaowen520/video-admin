@@ -77,3 +77,19 @@ export async function getVideoLongLink(params: { id: number }) {
     },
   });
 }
+
+/** 统计 */
+export async function getCountGantt(params: { endDate: string; startDate: string; year: number }) {
+  return request<API.ResponseResult>(`${API_URL}/count/gantt`, {
+    method: 'GET',
+    params: {
+      ...params,
+    },
+  });
+}
+
+export async function getCountInfo() {
+  return request<API.ResponseResult>(`${API_URL}/count/info`, {
+    method: 'GET',
+  });
+}
